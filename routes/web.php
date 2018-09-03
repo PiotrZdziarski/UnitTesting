@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Route::get('/alpha', function() {
@@ -24,3 +24,7 @@ Route::get('/beta', function() {
 });
 
 Route::get('/accessor/index', 'AccessorController@index');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
