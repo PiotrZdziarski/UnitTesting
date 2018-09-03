@@ -7,4 +7,5 @@ $factory->define(\App\Post::class, function (Faker $faker) {
         'title' => $faker->text(50),
         'description' => $faker->text(200)
     ];
+
 });
