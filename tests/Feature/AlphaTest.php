@@ -15,7 +15,7 @@ class AlphaTest extends TestCase
     public function testBasicTest()
     {
         $response = $this->get('/')
-            ->assertSee('Laravel')
+            ->assertSee('monkaS')
             ->assertDontSee('Beta');
 
 
