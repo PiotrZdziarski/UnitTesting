@@ -22,3 +22,5 @@ Route::get('/alpha', function() {
 Route::get('/beta', function() {
     return view('beta');
 });
+
+Route::get('/accessor/index', 'AccessorController@index');
