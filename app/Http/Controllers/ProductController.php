@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Http\Resources\ProductResource;
 use App\Product;
 
@@ -15,6 +16,23 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
+        $categories = Category::all();
+
+        $productsCount = count($products);
+        $categoriesCount = count($categories);
+
+        for($i = 0; $i < $productsCount; $i++) {
+            $currentDate = date('d.m.Y', strtotime($products[$i]->created_at));
+
+            for($j = 0; $j < $categoriesCount; $j++) {
+                if($products[$i]->category_id == $categories[$j]->id) {
+                    $products[$i] = collect($products[$i])->merge(['category'
+                        => str_replace('.', '', $categories[$j]->category)]);
+                    break;
+                }
+            }
+            $products[$i] = collect($products[$i])->merge(['date' => $currentDate]);
+        }
 
         return ProductResource::collection($products);
     }
