@@ -1,29 +1,30 @@
 <template>
-    <table id="recordsListView">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th class="not-sortable">Image</th>
-            <th>Product Name</th>
-            <th>Category</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Created Date</th>
-            <th>Status</th>
-            <th class="not-sortable">Actions</th>
-        </tr>
-        </thead>
-        <tbody>
+    <div>
+        <table id="recordsListView">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th class="not-sortable">Image</th>
+                <th>Product Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Created Date</th>
+                <th>Status</th>
+                <th class="not-sortable">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
             <tr v-for="record in records">
                 <td><a href="#" class="btn-link">#{{record.id}}</a></td>
                 <td><a href="#" class="btn-link"> <img src="img/products/thumb-80x60.jpg"
                                                        alt="">
                 </a></td>
-                <td><a href="#" class="btn-link">Baby Dress</a></td>
-                <td><a href="#" class="btn-link">Baby Products</a></td>
-                <td>$12.00</td>
+                <td><a href="#" class="btn-link">{{record.title}}</a></td>
+                <td><a href="#" class="btn-link">{{record.category}}</a></td>
+                <td>${{record.price}}</td>
                 <td>1</td>
-                <td>12 June 2017</td>
+                <td>{{record.date}}</td>
                 <td><span class="label label-success">Approved</span></td>
                 <td>
                     <div class="dropleft"><a href="#" class="btn-link" data-toggle="dropdown"><i
@@ -34,8 +35,13 @@
                     </div>
                 </td>
             </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+        <div v-if="this.loading === true" style="width: 100%; height: 150px; display: flex; justify-content: center; align-items: center">
+            <!--<div v-if="this.loading === true" class="lds-dual-ring"></div>-->
+            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -45,7 +51,8 @@
         name: "productsList",
         data() {
             return {
-                records: []
+                records: [],
+                loading: true
             }
         },
         props: {
@@ -57,11 +64,75 @@
             const self = this;
             axios.get(this.api_link.toString()).then(function (Response) {
                 self.records = Response.data.data;
+                self.loading = false;
             });
         }
     }
 </script>
 
 <style scoped>
+    /*.lds-dual-ring {
+        display: inline-block;
+        width: 90px;
+        height: 90px;
+    }
+
+    .lds-dual-ring:after {
+        content: " ";
+        display: block;
+        width: 70px;
+        height: 70px;
+        margin: 1px;
+        border-radius: 50%;
+        border: 8px solid lightgray;
+        border-color: lightgray transparent lightgray transparent;
+        animation: lds-dual-ring 1.2s linear infinite;
+    }
+
+    @keyframes lds-dual-ring {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }*/
+
+
+    .lds-ring {
+        display: inline-block;
+        position: relative;
+        width: 90px;
+        height: 64px;
+    }
+    .lds-ring div {
+        box-sizing: border-box;
+        display: block;
+        position: absolute;
+        width: 70px;
+        height: 70px;
+        margin: 6px;
+        border: 8px solid lightgray;
+        border-radius: 50%;
+        animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        border-color: lightgray transparent transparent transparent;
+    }
+    .lds-ring div:nth-child(1) {
+        animation-delay: -0.45s;
+    }
+    .lds-ring div:nth-child(2) {
+        animation-delay: -0.3s;
+    }
+    .lds-ring div:nth-child(3) {
+        animation-delay: -0.15s;
+    }
+    @keyframes lds-ring {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
 
 </style>
