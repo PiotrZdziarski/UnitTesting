@@ -38,16 +38,8 @@
                                 Products</a></h3>
                         <p>Found Total 1,330 Products</p></div>
                     <div class="actions">
-                        <form action="#" class="search flex-wrap flex-md-nowrap">
-                            <input type="text" class="form-control"
-                                   placeholder="Product Name..."
-                                   required> <select name="select"
-                                                     class="form-control">
-                                <option value="" selected>Product Category</option>
-                            </select>
-                            <button type="submit" class="btn btn-rounded"><i class="fa fa-search"></i></button>
-                        </form>
-                        <a href="#" class="addProduct btn btn-lg btn-rounded btn-warning">Add Product</a></div>
+                        <add-product api_link="@php echo getenv('APP_URL').'/api' @endphp"></add-product>
+                    </div>
                 </div>
             </div>
             <div class="panel">

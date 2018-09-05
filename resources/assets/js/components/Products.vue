@@ -71,34 +71,6 @@
 </script>
 
 <style scoped>
-    /*.lds-dual-ring {
-        display: inline-block;
-        width: 90px;
-        height: 90px;
-    }
-
-    .lds-dual-ring:after {
-        content: " ";
-        display: block;
-        width: 70px;
-        height: 70px;
-        margin: 1px;
-        border-radius: 50%;
-        border: 8px solid lightgray;
-        border-color: lightgray transparent lightgray transparent;
-        animation: lds-dual-ring 1.2s linear infinite;
-    }
-
-    @keyframes lds-dual-ring {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
-    }*/
-
-
     .lds-ring {
         display: inline-block;
         position: relative;

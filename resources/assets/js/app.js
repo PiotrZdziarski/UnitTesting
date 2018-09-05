@@ -17,6 +17,7 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('productsList', require('./components/Products.vue'));
+Vue.component('add-product', require('./components/AddProduct.vue'));
 
 const app = new Vue({
     el: '#content'
