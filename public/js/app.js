@@ -48308,7 +48308,7 @@ var render = function() {
         "button",
         {
           staticClass: "btn  btn-warning  addProduct btn-rounded",
-          staticStyle: { "background-color": "#ffaabb" },
+          staticStyle: { "background-color": "#ff64a8" },
           attrs: { type: "submit" }
         },
         [_vm._v("Add Product")]
