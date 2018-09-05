@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use App\Category;
-use App\Http\Resources\ProductResource;
 use App\Product;
 use Tests\TestCase;
 
@@ -36,5 +35,43 @@ class productTest extends TestCase
         $this->get('/api/products')
             ->assertSee($productTitle)
             ->assertSee($categoryName);
+    }
+
+
+    /**
+     * Test product storing
+     * @return void
+     */
+    public function testAddingProduct()
+    {
+        //generate random table row
+        $string = str_random(10);
+        $price = rand(1,1000);
+        $category_id = rand(1,10);
+
+        //perform a post request
+        $response = $this->json('POST','/api/product_store', [
+            'title' => $string,
+            'price' => $price,
+            'category_id' => $category_id
+        ]);
+
+        //check if everything is good
+        $response
+            ->assertStatus(201)
+            ->assertJson([
+                "data"  => [
+                    "title" => $string,
+                    "price" => $price,
+                    "category_id" => $category_id
+                ]
+            ]);
+
+        //delete product
+        //get id of added product
+        $id =  $response->getOriginalContent()->id;
+
+        //delete it
+        Product::where('id', $id)->delete();
     }
 }

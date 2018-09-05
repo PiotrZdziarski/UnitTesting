@@ -10,7 +10,7 @@
         <input type="text" class="form-control" id="price" name="price"
                placeholder="Price"
                required>
-        <button type="submit" style="background-color: #ffaabb" class="btn  btn-warning  addProduct btn-rounded">Add Product</button>
+        <button type="submit" style="background-color: #ff64a8" class="btn  btn-warning  addProduct btn-rounded">Add Product</button>
     </form>
 </template>
 
