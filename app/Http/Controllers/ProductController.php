@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Http\Resources\ProductResource;
 use App\Product;
+use Illuminate\Http\Request;
 
 
 class ProductController extends Controller
@@ -15,7 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::orderBy('id', 'desc')->get();
         $categories = Category::all();
 
         $productsCount = count($products);
@@ -35,5 +36,26 @@ class ProductController extends Controller
         }
 
         return ProductResource::collection($products);
+    }
+
+    /**
+     * Store new product to database
+     * @param Request $request
+     * @return ProductResource
+     */
+    public function store(Request $request)
+    {
+        $title = $request->input('title');
+        $category_id = $request->input('category_id');
+        $price = $request->input('price');
+
+        $product = new Product;
+        $product->title = $title;
+        $product->price = $price;
+        $product->category_id = $category_id;
+
+        if($product->save()) {
+            return new ProductResource($product);
+        }
     }
 }
